@@ -105,13 +105,13 @@ countNums:
 	.size	countNums, .-countNums
 	.section	.rodata
 .LC1:
-	.string	"in.txt"
+	.string	"./tests/in.txt"
 .LC2:
 	.string	"%c"
 .LC3:
 	.string	"w"
 .LC4:
-	.string	"out.txt"
+	.string	"./tests/asm_out.txt"
 .LC5:
 	.string	"%ld"
 	.text
