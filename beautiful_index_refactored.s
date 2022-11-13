@@ -7,49 +7,55 @@ countNums:
 	endbr64
 	push	rbp
 	mov	rbp, rsp
-	mov	QWORD PTR -24[rbp], rdi
-	mov	QWORD PTR -32[rbp], rsi
-	mov	QWORD PTR -16[rbp], 0
-	mov	QWORD PTR -8[rbp], 0
+    push rbx
+    push r12
+    push r13
+    push r14
+    mov rbx, rdi # rbx = str
+    mov r12, rsi # r12 = n
+	// mov	QWORD PTR -24[rbp], rdi
+	// mov	QWORD PTR -32[rbp], rsi
+    // mov	QWORD PTR -16[rbp], 0
+	// mov	QWORD PTR -8[rbp], 0
+	mov	r13, 0 # r13 = counter
+	mov	r14, 0 # r14 = i
 	jmp	.L2
 .L7:
-	mov	rdx, QWORD PTR -24[rbp]
-	mov	rax, QWORD PTR -8[rbp]
-	add	rax, rdx
+	// mov	rdx, QWORD PTR -24[rbp]
+	mov	rax, r14
+	add	rax, rbx
 	movzx	eax, BYTE PTR [rax]
 	cmp	al, 47
 	jle	.L3
-	mov	rdx, QWORD PTR -24[rbp]
-	mov	rax, QWORD PTR -8[rbp]
-	add	rax, rdx
+	// mov	rdx, QWORD PTR -24[rbp]
+	mov	rax, r14
+	add	rax, rbx
 	movzx	eax, BYTE PTR [rax]
 	cmp	al, 57
 	jg	.L3
 	jmp	.L4
 .L6:
-	add	QWORD PTR -8[rbp], 1
+	add	r14, 1
 .L4:
-	mov	rdx, QWORD PTR -24[rbp]
-	mov	rax, QWORD PTR -8[rbp]
-	add	rax, rdx
+	mov	rax, r14
+	add	rax, rbx
 	movzx	eax, BYTE PTR [rax]
 	cmp	al, 47
 	jle	.L5
-	mov	rdx, QWORD PTR -24[rbp]
-	mov	rax, QWORD PTR -8[rbp]
-	add	rax, rdx
+	mov	rax, r14
+	add	rax, rbx
 	movzx	eax, BYTE PTR [rax]
 	cmp	al, 57
 	jle	.L6
 .L5:
-	add	QWORD PTR -16[rbp], 1
+	add	r14, 1
 .L3:
-	add	QWORD PTR -8[rbp], 1
+	add	r14, 1
 .L2:
-	mov	rax, QWORD PTR -8[rbp]
-	cmp	rax, QWORD PTR -32[rbp]
+	mov	rax, r14
+	cmp	rax, rsi
 	jb	.L7
-	mov	rax, QWORD PTR -16[rbp]
+	mov	rax, r14
 	pop	rbp
 	ret
 	.size	countNums, .-countNums
@@ -61,7 +67,7 @@ countNums:
 .LC2:
 	.string	"w"
 .LC3:
-	.string	"./tests/beautiful_asm_out.txt"
+	.string	"./tests/refactored_out.txt"
 .LC4:
 	.string	"%lu"
 	.text

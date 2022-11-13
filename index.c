@@ -2,14 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-unsigned long fsize(char* file) {
-    FILE* f = fopen(file, "r");
-    fseek(f, 0, SEEK_END);
-    unsigned long len = (unsigned long)ftell(f);
-    fclose(f);
-    return len;
-}
-
 unsigned long countNums(char* string, unsigned long length) {
     unsigned long counter = 0;
     for (unsigned long i = 0; i < length; ++i) {
@@ -24,15 +16,12 @@ unsigned long countNums(char* string, unsigned long length) {
 }
 
 int main(void) {
-    unsigned long n = fsize("./tests/in.txt"); // Длина строки в файле, что бы было проще выделить память и считать строку
     FILE* readf = fopen("./tests/in.txt", "r"); // Считываем из in.txt
-    char* str = (char*)malloc(n * sizeof(char));
-    for (unsigned long i = 0; i < n; ++i) {
-        fscanf(readf, "%c", str + i); // Ввод посимвольный, потому что так удобнее
-    }
+    static char str[100000000];
+    unsigned long n = fread(str, 1, 100000000, readf);
     fclose(readf);
     FILE* writef = fopen("./tests/out.txt", "w");
-    fprintf(writef, "%ld", countNums(str, n));
+    fprintf(writef, "%lu", countNums(str, n));
     fclose(writef);
     return 0;
 }
