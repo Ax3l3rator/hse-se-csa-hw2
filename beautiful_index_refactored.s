@@ -13,21 +13,15 @@ countNums:
     push 	r14
     mov rbx, rdi # rbx = str
     mov r12, rsi # r12 = n
-	// mov	QWORD PTR -24[rbp], rdi
-	// mov	QWORD PTR -32[rbp], rsi
-    // mov	QWORD PTR -16[rbp], 0
-	// mov	QWORD PTR -8[rbp], 0
 	mov	r13, 0 # r13 = counter
 	mov	r14, 0 # r14 = i
 	jmp	.L2
 .L7:
-	// mov	rdx, QWORD PTR -24[rbp]
 	mov	rax, r14
 	add	rax, rbx
 	movzx	eax, BYTE PTR [rax]
 	cmp	al, 47
 	jle	.L3
-	// mov	rdx, QWORD PTR -24[rbp]
 	mov	rax, r14
 	add	rax, rbx
 	movzx	eax, BYTE PTR [rax]
@@ -81,26 +75,26 @@ main:
 	endbr64
 	push	rbp
 	mov	rbp, rsp
-	push 	rbx
+	push 	rbx 
 	push 	r12
 	push	r13
 	sub	rsp, 32
 	lea	rsi, .LC0[rip]
 	lea	rdi, .LC1[rip]
 	call	fopen@PLT
-	mov	rbx, rax
+	mov	rbx, rax #rbx поток ввода
 	mov	rcx, rbx
 	mov	edx, 100000000
 	mov	esi, 1
 	lea	rdi, str.3026[rip]
 	call	fread@PLT
-	mov	r12, rax
+	mov	r12, rax # r12 размер считанной строки
 	mov	rdi, rbx
 	call	fclose@PLT
 	lea	rsi, .LC2[rip]
 	lea	rdi, .LC3[rip]
 	call	fopen@PLT
-	mov	r13, rax
+	mov	r13, rax # r13 поток вывода
 	mov	rsi, r12
 	lea	rdi, str.3026[rip]
 	call	countNums
