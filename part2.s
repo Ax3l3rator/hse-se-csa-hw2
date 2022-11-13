@@ -3,11 +3,11 @@
 .LC0:
 	.string	"r"
 .LC1:
-	.string	"./tests/in.txt"
+	.string	"./tests/in3.txt"
 .LC2:
 	.string	"w"
 .LC3:
-	.string	"./tests/part_out.txt"
+	.string	"./tests/part_out3.txt"
 .LC4:
 	.string	"%lu"
 	.text

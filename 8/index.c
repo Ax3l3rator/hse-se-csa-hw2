@@ -46,6 +46,7 @@ int main(int argc, char** argv) {
         time = clock() - time;
         printf("%lu\n", res);
         printf("Execution time:%lf\n", (double)time / CLOCKS_PER_SEC);
+
     }
     else {
         FILE* readf = fopen(argv[1], "r");
@@ -54,6 +55,7 @@ int main(int argc, char** argv) {
             return 1;
         }
         n = fread(str, 1, 100000000, readf);
+        printf("%d", n);
         fclose(readf);
         FILE* writef = fopen(argv[2], "w");
         clock_t time = clock();
