@@ -23,13 +23,13 @@ void generateString(char* s, unsigned long n) {
     }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
     unsigned long n;
     static char str[100000000];
     if(argc <= 1){
         return 1;
     }
-    if(strcmp(argv[1],"-r")){
+    if(strcmp(argv[1], "-r") == 0){
         srand(time(0));
         n = rand() % 100000001;
         unsigned long res;
@@ -43,15 +43,13 @@ int main(int argc, char* argv[]) {
     else {
         FILE* readf = fopen(argv[1], "r");
         if(readf == NULL){
+            printf("No such file\n");
             return 1;
         }
         static char str[100000000];
         n = fread(str, 1, 100000000, readf);
         fclose(readf);
         FILE* writef = fopen(argv[2], "w");
-        if(writef == NULL){
-            return 1;
-        }
         unsigned long res;
         clock_t time = clock();
         res = countNums(str, n);
