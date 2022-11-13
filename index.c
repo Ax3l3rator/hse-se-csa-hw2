@@ -15,12 +15,21 @@ unsigned long countNums(char* string, unsigned long length) {
     return counter;
 }
 
-int main(void) {
-    FILE* readf = fopen("./tests/in.txt", "r"); // Считываем из in.txt
+int main(int argc, char* argv[]) {
+    if(argc <= 1){
+        return 1;
+    }
+    FILE* readf = fopen(argv[1], "r");
+    if(readf == NULL){
+        return 1;
+    }
     static char str[100000000];
     unsigned long n = fread(str, 1, 100000000, readf);
     fclose(readf);
-    FILE* writef = fopen("./tests/out.txt", "w");
+    FILE* writef = fopen(argv[2], "w");
+    if(writef == NULL){
+        return 1;
+    }
     fprintf(writef, "%lu", countNums(str, n));
     fclose(writef);
     return 0;
