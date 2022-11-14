@@ -7,9 +7,9 @@ generateString:
 	push	rbp
 	mov	rbp, rsp
 	sub	rsp, 32
-	mov	QWORD PTR -24[rbp], rdi
-	mov	QWORD PTR -32[rbp], rsi
-	mov	QWORD PTR -8[rbp], 0
+	mov	rbx, rdi
+	mov	r12, rsi
+	mov	r13, 0
 	jmp	.L10
 .L11:
 	call	rand@PLT
@@ -28,15 +28,15 @@ generateString:
 	mov	ecx, eax
 	mov	eax, ecx
 	lea	ecx, 1[rax]
-	mov	rdx, QWORD PTR -24[rbp]
-	mov	rax, QWORD PTR -8[rbp]
+	mov	rdx, rbx
+	mov	rax, r13
 	add	rax, rdx
 	mov	edx, ecx
 	mov	BYTE PTR [rax], dl
-	add	QWORD PTR -8[rbp], 1
+	add	r13, 1
 .L10:
-	mov	rax, QWORD PTR -8[rbp]
-	cmp	rax, QWORD PTR -32[rbp]
+	mov	rax, r13
+	cmp	rax, r12
 	jb	.L11
 	nop
 	nop
